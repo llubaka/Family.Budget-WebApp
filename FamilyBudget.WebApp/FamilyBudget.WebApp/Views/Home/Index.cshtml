@@ -1,0 +1,44 @@
+﻿@{
+}
+
+<a id="baseURL" href="~/" hidden> </a>
+
+<script>
+    function add() {
+        var type = document.getElementById('type').value;
+        var date = document.getElementById('date').value;
+        var value = document.getElementById('value').value;
+        var baseURL = document.getElementById('baseURL').href;
+        var isDuplicated = document.getElementById('DON').value;
+        var contoller;
+        var d;
+
+        if (isDuplicated === 'YES') {
+            controller = "AddDuplicateIE";
+            d = "day";
+        } else {
+            controller = "AddIE";
+            d = "date";
+        }
+
+        //income
+        window.location.href = baseURL + "/Service/" + controller + "?value=" + value + "&"+d+"=" + date + "&ieType=" + type;
+
+    }
+</script>
+
+<div>
+    <label for="value">Value</label>
+    <input id="value" class="form-control" type="text" name="value">
+
+    <label for="date">Date</label>
+    <input id="date" class="form-control" type="text" name="date">
+
+    <label for="type">Income/Expense</label>
+    <input id="type" class="form-control" type="text" name="type">
+
+    <label for="DON">Duplicated or Not</label>
+    <input id="DON" class="form-control" type="text">
+
+    <button type="submit" onclick="add()" class="btn btn-primary"> Add </button>
+</div>
