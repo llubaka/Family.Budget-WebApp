@@ -17,7 +17,7 @@
             document.getElementById("date").type = "number";
             document.getElementById("date").setAttribute("name", "number");
             document.getElementById("date").setAttribute("max", "31");
-            document.getElementById("date").setAttribute("min", "0");
+            document.getElementById("date").setAttribute("min", "1");
             document.getElementById("day_dateLabel").innerHTML = "Day";
         }
     }
@@ -51,13 +51,80 @@
 
         //income
         window.location.href = baseURL + "/Service/" + controller + "?value=" + value + "&" + d + "=" + date + "&ieType=" + type;
+    }
 
+    function showOverlay() {
+        if (document.getElementById('body').classList.contains('overlay')) {
+            document.getElementById('body').classList.remove('overlay');
+        }
+        else {
+            document.getElementById('body').classList.add('overlay');
+        }
+    }
+
+    function show_hide_Form(id) {
+        showOverlay();
+
+        if (document.getElementById(id).classList.contains('hidden')) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('show');
+        }
+        else {
+            document.getElementById(id).classList.remove('show');
+            document.getElementById(id).classList.add('hidden');
+        }
     }
 </script>
 
+<button onclick="show_hide_Form('addFormId')"> ADD </button>
+<button> EDIT </button>
+<button> REMOVE </button>
+
 <style>
-    .addFormContainer {
+    .hidden {
+        display: none;
+    }
+
+    .show {
         display: inline-block;
+    }
+
+    .removeFormContainer{
+
+    }
+
+
+
+    .addFormContainer {
+        width: 300px;
+        z-index: 11;
+        position: relative;
+        margin: auto;
+        margin-top: 70px;
+    }
+
+    .subAddFormContainer {
+        border: solid;
+        padding: 20px;
+        padding-bottom: 27px;
+        border-radius: 10px;
+        background-color: white;
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    }
+
+    .overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(51,51,51,0.3);
+        z-index: 10;
+        -webkit-box-shadow: inset 0px 0px 200px 200px rgba(0,0,0,0.22);
+        -moz-box-shadow: inset 0px 0px 200px 200px rgba(0,0,0,0.22);
+        box-shadow: inset 0px 0px 200px 200px rgba(0,0,0,0.22);
     }
 
     .valueContainer {
@@ -131,31 +198,37 @@
         }
 </style>
 
-<div class="addFormContainer">
-    <div class="valueContainer">
-        <label id="valueLabel" for="value">Income Value</label>
-        <input id="value" class="form-control" type="text" name="value">
+<div id="addFormId" class="addFormContainer hidden">
+
+    <div class="subAddFormContainer">
+
+        <div class="valueContainer">
+            <label id="valueLabel" for="value">Income Value</label>
+            <input id="value" class="form-control" type="text" name="value" required>
+        </div>
+
+        <div class="dateContainer">
+            <label id="day_dateLabel" for="date">Date</label>
+            <input id="date" class="form-control" type="date" name="date" required>
+        </div>
+
+
+        <div class="donContainer">
+            <input type="checkbox" id="DuplicateValueCheckBox" onclick="toggleDate();">
+            <label for="DuplicateValueCheckBox">Duplicate value</label>
+        </div>
+
+        <div class="ieContainer">
+            <input id="type" value="0" hidden>
+
+            <div class="ieButton incomeButtom" onclick="changeType('0')"> INCOME </div>
+            <div class="ieButton expenseButton" onclick="changeType('1')"> EXPENSE </div>
+        </div>
+
+        <div class="submitButtonContainer">
+            <button type="submit" class="submitButton" onclick="add()"> ADD </button>
+        </div>
+
     </div>
 
-    <div class="dateContainer">
-        <label id="day_dateLabel" for="date">Date</label>
-        <input id="date" class="form-control" type="date" name="date">
-    </div>
-
-
-    <div class="donContainer">
-        <input type="checkbox" id="DuplicateValueCheckBox" onclick="toggleDate();">
-        <label for="DuplicateValueCheckBox">Duplicate value</label>
-    </div>
-
-    <div class="ieContainer">
-        <input id="type" value="0" hidden>
-
-        <div class="ieButton incomeButtom" onclick="changeType('0')"> INCOME </div>
-        <div class="ieButton expenseButton" onclick="changeType('1')"> EXPENSE </div>
-    </div>
-
-    <div class="submitButtonContainer">
-        <div class="submitButton" onclick="add()"> ADD </div>
-    </div>
 </div>
