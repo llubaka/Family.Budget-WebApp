@@ -26,5 +26,17 @@
 
             _db.SaveChanges();
         }
+
+        //TODO: Taka all incomes , dI
+
+        //TODO: Take all expenses , dE
+
+        //remove , update , delete 
+
+        //TODO: Get Income for spec. month
+
+        //TODO: Get Expense for spec. month
+
+        //TODO: Get dohod for spec. month
     }
 }

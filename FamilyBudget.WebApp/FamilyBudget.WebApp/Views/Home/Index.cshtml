@@ -4,16 +4,44 @@
 <a id="baseURL" href="~/" hidden> </a>
 
 <script>
+    function toggleDate() {
+        var isChecked = document.getElementById("DuplicateValueCheckBox").checked;
+
+        //Duplicated value
+        if (!isChecked) {
+            document.getElementById("date").type = "date";
+            document.getElementById("date").setAttribute("name", "date");
+            document.getElementById("day_dateLabel").innerHTML = "Date";
+        }
+        else {
+            document.getElementById("date").type = "number";
+            document.getElementById("date").setAttribute("name", "number");
+            document.getElementById("date").setAttribute("max", "31");
+            document.getElementById("date").setAttribute("min", "0");
+            document.getElementById("day_dateLabel").innerHTML = "Day";
+        }
+    }
+
+    function changeType(chosenType) {
+        document.getElementById('type').value = chosenType;
+
+        if (chosenType === '0') {
+            document.getElementById("valueLabel").innerHTML = "Income Value";
+        }
+        else if (chosenType === "1") {
+            document.getElementById("valueLabel").innerHTML = "Expense Value";
+        }
+    }
+
     function add() {
         var type = document.getElementById('type').value;
         var date = document.getElementById('date').value;
         var value = document.getElementById('value').value;
         var baseURL = document.getElementById('baseURL').href;
-        var isDuplicated = document.getElementById('DON').value;
         var contoller;
         var d;
 
-        if (isDuplicated === 'YES') {
+        if (document.getElementById("DuplicateValueCheckBox").checked === true) {
             controller = "AddDuplicateIE";
             d = "day";
         } else {
@@ -22,23 +50,112 @@
         }
 
         //income
-        window.location.href = baseURL + "/Service/" + controller + "?value=" + value + "&"+d+"=" + date + "&ieType=" + type;
+        window.location.href = baseURL + "/Service/" + controller + "?value=" + value + "&" + d + "=" + date + "&ieType=" + type;
 
     }
 </script>
 
-<div>
-    <label for="value">Value</label>
-    <input id="value" class="form-control" type="text" name="value">
+<style>
+    .addFormContainer {
+        display: inline-block;
+    }
 
-    <label for="date">Date</label>
-    <input id="date" class="form-control" type="text" name="date">
+    .valueContainer {
+        margin: 10px;
+    }
 
-    <label for="type">Income/Expense</label>
-    <input id="type" class="form-control" type="text" name="type">
+    .dateContainer {
+        margin: 10px;
+    }
 
-    <label for="DON">Duplicated or Not</label>
-    <input id="DON" class="form-control" type="text">
+    .donContainer {
+        margin: 10px;
+    }
 
-    <button type="submit" onclick="add()" class="btn btn-primary"> Add </button>
+    .ieContainer {
+        margin: 10px;
+        text-align: center;
+    }
+
+    .submitButtonContainer {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .ieButton {
+        display: inline-block;
+        padding: 5px;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-left: 5px;
+        margin-right: 5px;
+        font-size: 17px;
+        border-radius: 5px;
+        color: white;
+    }
+
+        .ieButton:hover {
+            cursor: pointer;
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        }
+
+    .incomeButtom {
+        background-color: #7CDA48;
+    }
+
+    .expenseButton {
+        background-color: #EC1919;
+    }
+
+    .submitButton {
+        display: inline-block;
+        font-size: 17px;
+        border-radius: 5px;
+        padding: 5px;
+        padding-left: 16px;
+        padding-right: 16px;
+        border: solid;
+        border-color: #2552E7;
+        color: #2552E7;
+        width: 90%;
+    }
+
+        .submitButton:hover {
+            cursor: pointer;
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            font-weight: bold;
+        }
+</style>
+
+<div class="addFormContainer">
+    <div class="valueContainer">
+        <label id="valueLabel" for="value">Income Value</label>
+        <input id="value" class="form-control" type="text" name="value">
+    </div>
+
+    <div class="dateContainer">
+        <label id="day_dateLabel" for="date">Date</label>
+        <input id="date" class="form-control" type="date" name="date">
+    </div>
+
+
+    <div class="donContainer">
+        <input type="checkbox" id="DuplicateValueCheckBox" onclick="toggleDate();">
+        <label for="DuplicateValueCheckBox">Duplicate value</label>
+    </div>
+
+    <div class="ieContainer">
+        <input id="type" value="0" hidden>
+
+        <div class="ieButton incomeButtom" onclick="changeType('0')"> Income </div>
+        <div class="ieButton expenseButton" onclick="changeType('1')"> Expense </div>
+    </div>
+
+    <div class="submitButtonContainer">
+        <div class="submitButton" onclick="add()"> Add </div>
+    </div>
 </div>
