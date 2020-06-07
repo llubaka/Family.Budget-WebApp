@@ -1,0 +1,13 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    var list = ViewData["list"] as List<FamilyBudget.WebApp.Models.IE>;
+}
+
+@foreach (var item in list)
+{
+    <h1> @item.Value</h1>
+}
+
+<h2>Index</h2>

@@ -29,22 +29,22 @@
             _db.SaveChanges();
         }
 
-        public List<IE> GetAllIncome(string userId)
+        public List<IE> GetIncomes(string userId)
         {
             return _db.IE.Where(ie => ie.IEType == IEType.Income && ie.UserId == userId).ToList();
         }
 
-        public List<IE> GetAllExpense(string userId)
+        public List<IE> GetExpenses(string userId)
         {
             return _db.IE.Where(ie => ie.IEType == IEType.Expense && ie.UserId == userId).ToList();
         }
 
-        public List<DuplicateIE> GetAllDuplicateIncome(string userId)
+        public List<DuplicateIE> GetDuplicateIncomes(string userId)
         {
             return _db.DuplicateIE.Where(ie => ie.IEType == IEType.Income && ie.UserId == userId).ToList();
         }
 
-        public List<DuplicateIE> GetAllDuplicateExpense(string userId)
+        public List<DuplicateIE> GetDuplicateExpenses(string userId)
         {
             return _db.DuplicateIE.Where(ie => ie.IEType == IEType.Expense && ie.UserId == userId).ToList();
         }
@@ -56,44 +56,49 @@
 
         public void RemoveIE(int IeIndex)
         {
-            _db.IE.Remove(GetIE(IeIndex));
+            var ie = GetIE(IeIndex);
+
+            _db.IE.Remove(ie);
+
             _db.SaveChanges();
         }
 
         public void UpdateIe(int IeIndex, int value, DateTime date)
         {
             var IE = GetIE(IeIndex);
+
             IE.Value = value;
             IE.Date = date;
+
             _db.SaveChanges();
         }
 
         public decimal GetIncomeByMonth(string userId, int month)
         {
             return _db.IE.Where(ie => ie.IEType == IEType.Income && ie.UserId == userId && ie.Date.Month == month)
-                            .Select(ie => ie.Value)
-                            .FirstOrDefault();
+                         .Select(ie => ie.Value)
+                         .FirstOrDefault();
         }
 
         public decimal GetExpenseByMonth(string userId, int month)
         {
             return _db.IE.Where(ie => ie.IEType == IEType.Expense && ie.UserId == userId && ie.Date.Month == month)
-                                .Select(ie => ie.Value)
-                                .FirstOrDefault();
+                         .Select(ie => ie.Value)
+                         .FirstOrDefault();
         }
 
         public decimal GetIncomeByYear(string userId, int year)
         {
             return _db.IE.Where(ie => ie.IEType == IEType.Income && ie.UserId == userId && ie.Date.Year == year)
-                            .Select(ie => ie.Value)
-                            .FirstOrDefault();
+                         .Select(ie => ie.Value)
+                         .FirstOrDefault();
         }
 
         public decimal GetExpenseByYear(string userId, int year)
         {
             return _db.IE.Where(ie => ie.IEType == IEType.Expense && ie.UserId == userId && ie.Date.Year == year)
-                                .Select(ie => ie.Value)
-                                .FirstOrDefault();
+                         .Select(ie => ie.Value)
+                         .FirstOrDefault();
         }
 
         public decimal GetProfitByMonth(string userId, int month)

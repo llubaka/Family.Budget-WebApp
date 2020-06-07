@@ -2,6 +2,7 @@
 }
 
 <a id="baseURL" href="~/" hidden> </a>
+<input id="formOption" value=""  /> 
 
 <script>
     function toggleDate() {
@@ -49,7 +50,6 @@
             d = "date";
         }
 
-        //income
         window.location.href = baseURL + "/Service/" + controller + "?value=" + value + "&" + d + "=" + date + "&ieType=" + type;
     }
 
@@ -62,8 +62,10 @@
         }
     }
 
-    function show_hide_Form(id) {
+    function show_hide_Form(id, option) {
         showOverlay();
+
+        document.getElementById('formOption').value = option;
 
         if (document.getElementById(id).classList.contains('hidden')) {
             document.getElementById(id).classList.remove('hidden');
@@ -76,8 +78,8 @@
     }
 </script>
 
-<button onclick="show_hide_Form('addFormId')"> ADD </button>
-<button> EDIT </button>
+<button onclick="show_hide_Form('addFormId', 'addOption')"> ADD </button>
+<button onclick="show_hide_Form('addFormId', 'editOption')"> EDIT </button>
 <button> REMOVE </button>
 
 <style>

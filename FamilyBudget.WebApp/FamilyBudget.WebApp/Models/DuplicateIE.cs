@@ -23,7 +23,12 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-         
+
+        public DuplicateIE()
+        {
+
+        }
+
         public DuplicateIE(string userId, decimal value, int date, IEType ieType)
         {
             this.Value = value;
