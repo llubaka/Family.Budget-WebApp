@@ -3,9 +3,71 @@
     ViewBag.Title = "EditRemoveIE";
 }
 
-<h2>EditRemoveIE</h2>
+<input id="id" hidden value="-1" />
+<a id="hrefHelper" href="~/Service/EditIE/?id=" hidden></a>
+<a id="hrefHelper2" href="~/Service/EditDuplicateIE/?id=" hidden></a>
+
+
+<script>
+    function showHide(id) {
+        if (id === "editDuplicateIE") {
+             document.getElementById("editIE").classList.add('hidden');
+        }
+        else {
+             document.getElementById("editDuplicateIE").classList.add('hidden');
+        }
+
+        if (document.getElementById(id).classList.contains('hidden')) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('show');
+        }
+        else {
+            document.getElementById(id).classList.remove('show');
+            document.getElementById(id).classList.add('hidden');
+        }
+    }
+
+
+    function editIE() {
+        var hrefHelper = document.getElementById('hrefHelper').href;
+        var value = document.getElementById('value').value;
+        var id = document.getElementById('id').value;
+        var date = document.getElementById('date').value;
+
+        window.location.href = hrefHelper + id + '&value=' + value + '&date=' + date;
+    }
+
+    function editDuplicateIE() {
+        var hrefHelper = document.getElementById('hrefHelper2').href;
+        var value = document.getElementById('valueD').value;
+        var id = document.getElementById('id').value;
+        var day = document.getElementById('dayD').value;
+
+        window.location.href = hrefHelper + id + '&value=' + value + '&day=' + day;
+    }
+
+    function showDuplicateIEForm(id) {
+        document.getElementById('id').value = id;
+
+        showHide("editDuplicateIE");
+    }
+
+    function showIEForm(id) {
+        document.getElementById('id').value = id;
+
+        showHide("editIE");
+    }
+</script>
 
 <style>
+    .hidden {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+
     .pageContainer {
         width: 100%;
     }
@@ -60,8 +122,35 @@
         .remove:hover {
             cursor: pointer;
         }
+
+        .editUnit{
+            margin:5px;
+        }
+
+        .editIE{
+            margin:20px;
+        }
+
+        .editDuplicateIE{
+            margin:20px;
+        }
 </style>
 
+<div id="editIE" class="editIE hidden">
+    <input class="form-control editUnit"  id="value" type="text" placeholder="Choose value"/>
+    <input class="form-control editUnit"  id="date" type="date" />
+    <button class="btn btn-success editUnit" onclick="editIE()"> EDIT </button>
+</div>
+
+
+<div id="editDuplicateIE" class="editDuplicateIE hidden">
+    <input class="form-control editUnit"  id="valueD" type="text" placeholder="Choose value"/>
+    <input class="form-control editUnit"  id="dayD" type="number" placeholder="Choose day"/>
+    <button class="btn btn-success editUnit" onclick="editDuplicateIE()"> EDIT </button>
+</div>
+
+
+<input id="id" value="-1" hidden />
 
 <div class="pageContainer">
     @foreach (var ie in Model.IEs)
@@ -72,15 +161,13 @@
 
                 <div class="componentContainer">
                     <div class="component green">@ie.IEType </div>
-                    <div class="component green"> @ie.Value</div>
+                    <div class="component green"> @ie.Value $</div>
                     <div class="component">@ie.Date.ToString("dd/MM/yyyy") </div>
                 </div>
 
                 <div class="buttonsContainer">
 
-                    <a>
-                        <span class="glyphicon glyphicon-edit edit"> </span>
-                    </a>
+                    <span class="glyphicon glyphicon-edit edit" onclick="showIEForm(@ie.Id)"> </span>
 
                     <a href="@Url.Action("RemoveIE", "Service", new { id = ie.Id })">
                         <span class="glyphicon glyphicon-remove remove"> </span>
@@ -96,12 +183,13 @@
 
                 <div class="componentContainer">
                     <div class="component red">@ie.IEType </div>
-                    <div class="component red"> @ie.Value</div>
+                    <div class="component red"> @ie.Value $</div>
                     <div class="component">@ie.Date.ToString("dd/MM/yyyy")  </div>
                 </div>
 
                 <div class="buttonsContainer">
-                    <span class="glyphicon glyphicon-edit edit"> </span>
+
+                    <span class="glyphicon glyphicon-edit edit" onclick="showIEForm(@ie.Id)"> </span>
 
                     <a href="@Url.Action("RemoveIE", "Service", new { id = ie.Id })">
                         <span class="glyphicon glyphicon-remove remove"> </span>
@@ -121,12 +209,12 @@
 
                 <div class="componentContainer">
                     <div class="component green">@dIE.IEType-Duplicate </div>
-                    <div class="component green">@dIE.Value</div>
+                    <div class="component green">@dIE.Value $</div>
                     <div class="component">Day @dIE.Day </div>
                 </div>
 
                 <div class="buttonsContainer">
-                    <span class="glyphicon glyphicon-edit edit"> </span>
+                    <span class="glyphicon glyphicon-edit edit" onclick="showDuplicateIEForm(@dIE.Id)"> </span>
 
                     <a href="@Url.Action("RemoveDuplicateIE", "Service", new { id = dIE.Id })">
                         <span class="glyphicon glyphicon-remove remove"> </span>
@@ -142,12 +230,12 @@
 
                 <div class="componentContainer">
                     <div class="component red">@dIE.IEType </div>
-                    <div class="component red">@dIE.Value</div>
-                    <div class="component">@dIE.Day </div>
+                    <div class="component red">@dIE.Value $</div>
+                    <div class="component">Day @dIE.Day </div>
                 </div>
 
                 <div class="buttonsContainer">
-                    <span class="glyphicon glyphicon-edit edit"> </span>
+                    <span class="glyphicon glyphicon-edit edit" onclick="showDuplicateIEForm(@dIE.Id)"> </span>
 
                     <a href="@Url.Action("RemoveDuplicateIE", "Service", new { id = dIE.Id })">
                         <span class="glyphicon glyphicon-remove remove"> </span>

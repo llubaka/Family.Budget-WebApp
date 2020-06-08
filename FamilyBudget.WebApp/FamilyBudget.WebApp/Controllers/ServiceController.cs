@@ -32,7 +32,7 @@
         {
             string userId = User.Identity.GetUserId();
 
-            ViewData["result"] = "Successfully added " + ieType.ToString(); 
+            ViewData["result"] = "Successfully added " + ieType.ToString();
 
             _service.AddDuplicateIE(userId, value, day, ieType);
 
@@ -64,6 +64,24 @@
             _service.RemoveDuplicateIE(id);
 
             ViewData["result"] = "Successfully removed.";
+
+            return RedirectToAction("EditRemoveIE", "Service");
+        }
+
+        public ActionResult EditIE(int id, decimal value, string date)
+        {
+            _service.EditIE(id,value,Convert.ToDateTime(date));
+
+            ViewData["result"] = "Successfully updated.";
+
+            return RedirectToAction("EditRemoveIE", "Service");
+        }
+
+        public ActionResult EditDuplicateIE(int id, decimal value, int day)
+        {
+            _service.EditDuplicateIE(id, value, day);
+
+            ViewData["result"] = "Successfully updated.";
 
             return RedirectToAction("EditRemoveIE", "Service");
         }

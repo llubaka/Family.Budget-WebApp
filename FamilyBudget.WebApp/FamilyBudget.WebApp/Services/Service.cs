@@ -87,12 +87,23 @@
             _db.SaveChanges();
         }
 
-        public void UpdateIe(int IeIndex, int value, DateTime date)
+        public void EditIE(int IeIndex, decimal value, DateTime date)
         {
             var IE = GetIE(IeIndex);
 
             IE.Value = value;
             IE.Date = date;
+
+            _db.SaveChanges();
+        }
+
+
+        public void EditDuplicateIE(int IeIndex, decimal value, int day)
+        {
+            var IE = GetDuplicateIE(IeIndex);
+
+            IE.Value = value;
+            IE.Day = day;
 
             _db.SaveChanges();
         }
