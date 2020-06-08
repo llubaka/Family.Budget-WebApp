@@ -29,6 +29,16 @@
             _db.SaveChanges();
         }
 
+        public List<IE> GetIEs(string userId)
+        {
+            return _db.IE.Where(ie => ie.UserId == userId).ToList();
+        }
+
+        public List<DuplicateIE> GetDuplicateIEs(string userId)
+        {
+            return _db.DuplicateIE.Where(ie => ie.UserId == userId).ToList();
+        }
+
         public List<IE> GetIncomes(string userId)
         {
             return _db.IE.Where(ie => ie.IEType == IEType.Income && ie.UserId == userId).ToList();
@@ -54,11 +64,25 @@
             return _db.IE.Where(ie => ie.Id == IeIndex).FirstOrDefault();
         }
 
+        public DuplicateIE GetDuplicateIE(int duplicateIEIndex)
+        {
+            return _db.DuplicateIE.Where(ie => ie.Id == duplicateIEIndex).FirstOrDefault();
+        }
+
         public void RemoveIE(int IeIndex)
         {
             var ie = GetIE(IeIndex);
 
             _db.IE.Remove(ie);
+
+            _db.SaveChanges();
+        }
+
+        public void RemoveDuplicateIE(int duplicateIndex)
+        {
+            var duplicateIE = GetDuplicateIE(duplicateIndex);
+
+            _db.DuplicateIE.Remove(duplicateIE);
 
             _db.SaveChanges();
         }

@@ -2,7 +2,7 @@
 }
 
 <a id="baseURL" href="~/" hidden> </a>
-<input id="formOption" value="" hidden/> 
+<input id="formOption" value="" hidden />
 
 <script>
     function toggleDate() {
@@ -62,7 +62,7 @@
         }
     }
 
-    function show_hide_Form(id, option) {
+    function show_hide_AddForm(id) {
         showOverlay();
 
         if (document.getElementById(id).classList.contains('hidden')) {
@@ -76,10 +76,6 @@
     }
 </script>
 
-<button onclick="show_hide_Form('addFormId', 'addOption')"> ADD </button>
-<button onclick="show_hide_Form('addFormId', 'editOption')"> EDIT </button>
-<button> REMOVE </button>
-
 <style>
     .hidden {
         display: none;
@@ -89,8 +85,7 @@
         display: inline-block;
     }
 
-    .removeFormContainer{
-
+    .removeFormContainer {
     }
 
 
@@ -185,6 +180,7 @@
         padding-right: 16px;
         border: solid;
         border-color: #2552E7;
+        background-color: white;
         color: #2552E7;
         width: 90%;
     }
@@ -197,6 +193,12 @@
             font-weight: bold;
         }
 </style>
+
+
+
+<button onclick="show_hide_AddForm('addFormId')"> ADD </button>
+
+<a href="@Url.Action("EditRemoveIE", "Service")"> EDIT/REMOVE</a>
 
 <div id="addFormId" class="addFormContainer hidden">
 

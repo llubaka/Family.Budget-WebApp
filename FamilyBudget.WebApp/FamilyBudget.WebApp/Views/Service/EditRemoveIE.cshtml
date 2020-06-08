@@ -1,0 +1,142 @@
+﻿@model FamilyBudget.WebApp.ProjectModels.ProjectModels.IEs_DuplicateIEs
+@{
+    ViewBag.Title = "EditRemoveIE";
+}
+
+<h2>EditRemoveIE</h2>
+
+<style>
+    .pageContainer {
+        width: 100%;
+    }
+
+    .componentContainer {
+        display: inline-block;
+        width: 92%;
+    }
+
+    .buttonsContainer {
+        display: inline-block;
+    }
+
+    .mainComoponentsContainer {
+        -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+        margin-top: 20px;
+        border-radius: 7px;
+        font-size: 22px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .component {
+        display: inline-block;
+        width: 32%;
+        text-align: center;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .green {
+        color: forestgreen;
+    }
+
+    .edit {
+        color: #BDC41F;
+    }
+
+        .edit:hover {
+            cursor: pointer;
+        }
+
+    .remove {
+        padding-left: 5px;
+        color: red;
+    }
+
+        .remove:hover {
+            cursor: pointer;
+        }
+</style>
+
+
+<div class="pageContainer">
+    @foreach (var ie in Model.IEs)
+    {
+        if (ie.IEType == FamilyBudget.WebApp.Models.IEType.Income)
+        {
+            <div class="mainComoponentsContainer">
+
+                <div class="componentContainer">
+                    <div class="component green">@ie.IEType </div>
+                    <div class="component green"> @ie.Value</div>
+                    <div class="component">@ie.Date.ToString("dd/MM/yyyy") </div>
+                </div>
+
+                <div class="buttonsContainer">
+                    <span class="glyphicon glyphicon-edit edit"> </span>
+                    <span class="glyphicon glyphicon-remove remove"> </span>
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="mainComoponentsContainer">
+
+                <div class="componentContainer">
+                    <div class="component red">@ie.IEType </div>
+                    <div class="component red"> @ie.Value</div>
+                    <div class="component">@ie.Date.ToString("dd/MM/yyyy")  </div>
+                </div>
+
+                <div class="buttonsContainer">
+                    <span class="glyphicon glyphicon-edit edit"> </span>
+                    <span class="glyphicon glyphicon-remove remove"> </span>
+                </div>
+
+            </div>
+        }
+    }
+
+    @foreach (var dIE in Model.DuplicateIEs)
+    {
+        if (dIE.IEType == FamilyBudget.WebApp.Models.IEType.Income)
+        {
+            <div class="mainComoponentsContainer">
+
+                <div class="componentContainer">
+                    <div class="component green">@dIE.IEType-Duplicate </div>
+                    <div class="component green">@dIE.Value</div>
+                    <div class="component">Day @dIE.Day </div>
+                </div>
+
+                <div class="buttonsContainer">
+                    <span class="glyphicon glyphicon-edit edit"> </span>
+                    <span class="glyphicon glyphicon-remove remove"> </span>
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="mainComoponentsContainer">
+
+                <div class="componentContainer">
+                    <div class="component red">@dIE.IEType </div>
+                    <div class="component red">@dIE.Value</div>
+                    <div class="component">@dIE.Day </div>
+                </div>
+
+                <div class="buttonsContainer">
+                    <span class="glyphicon glyphicon-edit edit"> </span>
+                    <span class="glyphicon glyphicon-remove remove"> </span>
+                </div>
+
+            </div>
+        }
+    }
+</div>

@@ -14,9 +14,8 @@ namespace FamilyBudget.WebApp.Controllers
         public ActionResult Index()
         {
             string userId = User.Identity.GetUserId();
+
             ViewData["list"] = new Services.Service(new ApplicationDbContext()).GetIncomes(userId);
-
-
 
             return View();
         }

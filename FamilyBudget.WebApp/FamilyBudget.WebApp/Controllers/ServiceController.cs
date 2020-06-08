@@ -36,5 +36,30 @@
 
             return View();
         }
+
+        public ActionResult EditRemoveIE()
+        {
+            string userId = User.Identity.GetUserId();
+            ProjectModels.ProjectModels.IEs_DuplicateIEs ies_DuplicateIEs = new ProjectModels.ProjectModels.IEs_DuplicateIEs();
+
+            ies_DuplicateIEs.IEs = _service.GetIEs(userId);
+            ies_DuplicateIEs.DuplicateIEs = _service.GetDuplicateIEs(userId);
+
+            return View(ies_DuplicateIEs);
+        }
+
+        public ActionResult RemoveIE(int id)
+        {
+            _service.RemoveIE(id);
+
+            return RedirectToAction("Index", "Result");
+        }
+
+        public ActionResult RemoveDuplicateIE(int id)
+        {
+            _service.RemoveDuplicateIE(id);
+
+            return RedirectToAction("Index", "Result");
+        }
     }
 }

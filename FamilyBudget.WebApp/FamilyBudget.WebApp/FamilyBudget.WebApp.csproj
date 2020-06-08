@@ -183,6 +183,7 @@
     <Compile Include="Models\IE.cs" />
     <Compile Include="Models\IEType.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ProjectModels\ProjectModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Startup.cs" />
@@ -247,6 +248,7 @@
     <Content Include="Views\Service\Index.cshtml" />
     <Content Include="Views\Service\AddDuplicateIE.cshtml" />
     <Content Include="Views\Result\Index.cshtml" />
+    <Content Include="Views\Service\EditRemoveIE.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
