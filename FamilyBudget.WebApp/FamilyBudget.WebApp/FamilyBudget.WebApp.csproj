@@ -244,9 +244,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Service\AddIE.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
-    <Content Include="Views\Service\AddDuplicateIE.cshtml" />
     <Content Include="Views\Result\Index.cshtml" />
     <Content Include="Views\Service\EditRemoveIE.cshtml" />
   </ItemGroup>

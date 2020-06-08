@@ -77,8 +77,15 @@
                 </div>
 
                 <div class="buttonsContainer">
-                    <span class="glyphicon glyphicon-edit edit"> </span>
-                    <span class="glyphicon glyphicon-remove remove"> </span>
+
+                    <a>
+                        <span class="glyphicon glyphicon-edit edit"> </span>
+                    </a>
+
+                    <a href="@Url.Action("RemoveIE", "Service", new { id = ie.Id })">
+                        <span class="glyphicon glyphicon-remove remove"> </span>
+                    </a>
+
                 </div>
 
             </div>
@@ -95,7 +102,11 @@
 
                 <div class="buttonsContainer">
                     <span class="glyphicon glyphicon-edit edit"> </span>
-                    <span class="glyphicon glyphicon-remove remove"> </span>
+
+                    <a href="@Url.Action("RemoveIE", "Service", new { id = ie.Id })">
+                        <span class="glyphicon glyphicon-remove remove"> </span>
+                    </a>
+
                 </div>
 
             </div>
@@ -116,7 +127,11 @@
 
                 <div class="buttonsContainer">
                     <span class="glyphicon glyphicon-edit edit"> </span>
-                    <span class="glyphicon glyphicon-remove remove"> </span>
+
+                    <a href="@Url.Action("RemoveDuplicateIE", "Service", new { id = dIE.Id })">
+                        <span class="glyphicon glyphicon-remove remove"> </span>
+                    </a>
+
                 </div>
 
             </div>
@@ -133,7 +148,11 @@
 
                 <div class="buttonsContainer">
                     <span class="glyphicon glyphicon-edit edit"> </span>
-                    <span class="glyphicon glyphicon-remove remove"> </span>
+
+                    <a href="@Url.Action("RemoveDuplicateIE", "Service", new { id = dIE.Id })">
+                        <span class="glyphicon glyphicon-remove remove"> </span>
+                    </a>
+
                 </div>
 
             </div>

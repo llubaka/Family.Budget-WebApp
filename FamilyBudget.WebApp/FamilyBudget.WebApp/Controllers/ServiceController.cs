@@ -19,22 +19,24 @@
         public ActionResult AddIE(decimal value, string date, IEType ieType)
         {
             string userId = User.Identity.GetUserId();
-            ViewData["ieType"] = ieType;
+
+            ViewData["result"] = "Successfully added " + ieType.ToString();
 
             _service.AddIE(userId, value, Convert.ToDateTime(date), ieType);
 
-            return View();
+            return RedirectToAction("Index", "Result");
         }
 
         [HttpGet]
         public ActionResult AddDuplicateIE(decimal value, int day, IEType ieType)
         {
             string userId = User.Identity.GetUserId();
-            ViewData["ieType"] = ieType;
+
+            ViewData["result"] = "Successfully added " + ieType.ToString(); 
 
             _service.AddDuplicateIE(userId, value, day, ieType);
 
-            return View();
+            return RedirectToAction("Index", "Result");
         }
 
         public ActionResult EditRemoveIE()
@@ -52,14 +54,18 @@
         {
             _service.RemoveIE(id);
 
-            return RedirectToAction("Index", "Result");
+            ViewData["result"] = "Successfully removed.";
+
+            return RedirectToAction("EditRemoveIE", "Service");
         }
 
         public ActionResult RemoveDuplicateIE(int id)
         {
             _service.RemoveDuplicateIE(id);
 
-            return RedirectToAction("Index", "Result");
+            ViewData["result"] = "Successfully removed.";
+
+            return RedirectToAction("EditRemoveIE", "Service");
         }
     }
 }

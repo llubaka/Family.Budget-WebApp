@@ -1,16 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Index";
-    var list = ViewData["list"] as List<FamilyBudget.WebApp.Models.IE>;
+    var result = "Successfully.";
+
+    if (!(ViewData["result"] is null))
+    {
+        result = ViewData["result"].ToString();
+    }
 }
 
-@foreach (var item in list)
-{
-    <div>
-        <input id="@item.Id" value="@item.Id" hidden/> 
-        <h1> @item.Date</h1>
-        <h1> @item.User.UserName</h1>
-        
-    </div>
-}
 
-<h2>Index</h2>
+<h1>@result</h1>
